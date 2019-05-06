@@ -1,0 +1,93 @@
+<p class= "boiler-main-title">Boiler Monitor System</p>
+
+<div class = "boiler-content-container">
+	<div class = "boiler-sub-title">Boiler Status</div>
+		<div class= "boiler-status-container" >
+			<div class="boiler-status-widget-container">
+				<div class= "boiler-status-title" >Heat Req:</div>
+				<div id= "heatReqCont" class= "boiler-status-msg-container {{#if boilerState.heatRequestStatus}} running {{else}} fault {{/if}}"> 
+					<div class= "boiler-status-msg">{{#if boilerState.heatRequestStatus}} Yes {{else}} No {{/if}}</div>
+				</div>
+			</div>
+			<div class="boiler-status-widget-container">
+				<div class= "boiler-status-title" >Boiler On:</div>
+				<div id= "boilerOnCont" class= "boiler-status-msg-container {{#if boilerState.switchState}} running {{else}} fault {{/if}}">
+					<div class= "boiler-status-msg">{{#if boilerState.switchState}} Yes {{else}} No {{/if}}</div>
+				</div>
+			</div>
+			<div class="boiler-status-widget-container">
+				<div class= "boiler-status-title" >Boiler State:</div>
+				<div id= "boilerStateCont" class= "boiler-status-msg-container">
+					<div class= "boiler-status-msg"></div>
+				</div>
+			</div>
+		</div>
+	<div id = "faultMsg" class="boiler-fault-msg {{#isnt boilerState.boilerStateInd 3}} hidden {{/isnt}}" >Manual Restart Required</div>
+</div>
+
+<div class = "boiler-content-container">
+	<div class = "boiler-sub-title">Boiler Controls</div>
+	<div class= "bolier-buttons-container">
+		<div class = "btn-outline">
+			<button id="onOffButton" class = "boiler-onOff-btn" value = {{boilerState.switchState}} ><div class= "button-indicator"></div></button>
+		</div>
+		<div class = "btn-outline">
+			<button id="toggleBtn" class = "boiler-btn">Toggle</button>
+		</div>
+		<div id="btnMsg" class = "boiler-btn-msg" >blah</div> 
+
+	</div>
+</div>
+<div class = "boiler-content-container">
+	<div class= "bolier-buttons-container">
+		<div class = "btn-outline">
+			<button class = "boiler-btn" id="testBtn">test</button>
+		</div>
+	</div>
+</div>
+
+<div class = "boiler-content-container">
+	<div class = "boiler-sub-title">Boiler Event Log</div>
+	<form class="boiler-select-container" action="/boilerMonitor/change-log-days" method="post">
+		<label for ="log-days-select" class="select-label">Days Displayed: </label>
+		<select id="log-days-select" name = "numDays" class="boiler-select">
+			<option class="select-option" value="0" {{#eq logNumDays 0}} selected disabled{{/eq}} >Last Day</option>
+			<option class="select-option" value="7" {{#eq logNumDays 7}} selected disabled{{/eq}}>Last 7 Days </option>
+			<option class="select-option" value="30" {{#eq logNumDays 30}} selected disabled{{/eq}}>Last 30 Days</option>
+			<option class="select-option" value="-1" {{#eq logNumDays -1}} selected disabled{{/eq}}>All time</option>
+		</select>
+		<button type="submit" class="boiler-select-btn">Go</button>
+	</form>
+	<div class= "boiler-table-container">
+		{{#gt boilerEvents.length 0}}
+		<table class= "boiler-table" >
+			<tr>
+			 <th class="boiler-table-header"> Event Date </th>
+			 <th class="boiler-table-header"> Event Time </th>
+			 <th class="boiler-table-header"> Event Status </th>
+			</tr>
+			{{#each boilerEvents }} 
+				<tr class = "boiler-table-row-header">
+					<th  rowspan = {{add this.event_list.length 1 }} >
+						{{this.eventDateString}} </th> 
+					</tr>
+					{{#each this.event_list }} 
+					<tr class = "boiler-table-row  {{#eq ( add @index 1 ) ../this.event_list.length  }} boiler-table-row-end" {{/eq}} " >
+						<td class = "boiler-table-time"> {{this.eventTimeString}} </td> 
+						<td class = "boiler-table-status" > 
+							<div class = "boiler-table-status-marker {{#if this.eventStatus}} pass {{else}} fail {{/if}}"></div>
+							{{#if this.eventStatus}}  Pass {{else}}  Fail {{/if}} 
+						</td>
+					</tr>
+					{{/each}}
+			{{/each}}
+		</table>
+		{{else}}
+			<div style ="font-size: 24px; text-align: center; padding-bottom: 10px;">No events</div>
+		{{/gt}} 
+		
+	</div>
+</div>
+<script  src = "/javascripts/boilerClient.js" ></script>
+
+

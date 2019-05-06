@@ -1,0 +1,22 @@
+<p class= "boiler-main-title">Google Authenticator Setup</p>
+
+<div class = "boiler-content-container">
+	<div class = "boiler-sub-title">Scan QR code and continue</div>
+	
+	<div>
+		<form method="post">
+                <div class="form-group">
+                    {{ qr }}
+                </div>
+                <button type="submit" class="btn btn-primary">Continue</button>
+		</form>
+	</div>
+	
+</div>
+
+{{#each errors}} 
+         <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{ this }}
+         </div>
+{{/each}}

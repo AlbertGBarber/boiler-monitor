@@ -1,0 +1,39 @@
+<p class= "boiler-main-title">Boiler Monitor Login</p>
+
+{{#each errors}} 
+         <div class="alert alert-danger alert-dismissible" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                {{ this }}
+         </div>
+{{/each}}
+
+<div class = "boiler-content-container">
+		 <form method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" id="username" name="username" placeholder="Username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+            <div class="form-group">
+                <label for="password">Google Authenticator Code</label>
+                <input type="code" class="form-control" id="code" name="code">
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember" value="1"> Remember me
+                </label>
+            </div>
+            <div class= "bolier-buttons-container">
+				<div class = "btn-outline">
+					<button type="submit" formaction="/login" class="boiler-btn">Login</button>
+				</div>
+				<div class = "btn-outline">
+					<button type ="submit" formaction="/register" class = "boiler-btn" >Register</button>
+				</div>
+            </div>
+		</form>		
+</div>
+

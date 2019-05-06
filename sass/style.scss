@@ -1,0 +1,343 @@
+$doc-font-color: #1c1c1c;
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  color: $doc-font-color;
+  background-color: #eee9e2;
+}
+
+a {
+  color: #00B7FF;
+}
+
+$theme-color: #2402ad; //purple #230163 #2b06ff
+
+$main-content-width: 400px;
+
+.boiler-main-title{
+	display: block;
+	width: 100%;
+	font-size: 30px;
+	font-weight: 1000;
+	text-align: center;
+	margin-bottom: 0.5em;
+}
+	
+.boiler-content-container {
+	background-color: white;
+	box-sizing: border-box;
+	margin:  15px auto;
+	width: $main-content-width;
+	/*box-shadow: 0px 0px 10px 0px black;*/
+	padding: 5px;
+	border: 1px solid black;
+	border-radius: 5px;
+}
+
+.boiler-sub-title{
+	box-sizing: border-box;
+	width: 100%;
+	display: block;
+	border-top: 8px solid $theme-color;
+	border-bottom: 1px solid $theme-color;
+	border-radius: 5px 5px 0px 0px;
+	padding: 5px 0px;
+	font-size: 24px;
+	font-weight: 1000;
+}
+
+.boiler-status-container{
+	font-size: 20px;
+	width: 100%;
+	box-sizing: border-box;
+	padding: 10px 0px;
+}
+
+.boiler-status-widget-container{
+	box-sizing: border-box;
+	width: 32.3%;
+	text-align: center;
+	display: inline-block;
+	border-right: 1px solid $theme-color;
+	&:last-child{
+		border-width: 0px;
+	}
+}
+
+.boiler-status-title{
+	display: block;
+	width: 100%;
+	padding-bottom: 5px;
+	font-size: 20px;
+}
+
+$status-box-shadow-color: rgba(0, 0, 0, 0.4);
+$status-blur : 3px;
+$status-shadow-thickness: 2px;
+.boiler-status-msg-container{
+	position: relative;
+	display:inline-block;
+	width: 70%;
+	border: 8px solid #555;
+	border-radius: 50%;		
+	box-shadow: 0px 0px $status-blur $status-shadow-thickness  $status-box-shadow-color;
+	&.idle{
+		border-color: #555;
+	}
+	&.heating{
+		border-color: darken(yellow, 20%);
+	}
+	&.running{
+		border-color: green;
+	}
+	&.fault{
+		border-color: darken(red, 20%);
+	}
+	
+}
+
+.boiler-status-msg-container:after{
+	content: "";
+	display: block;
+	padding-top: 100%;
+}
+
+.boiler-status-msg{
+	font-size: 24px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0px 0px $status-blur $status-box-shadow-color;
+	border-radius: 50%; 
+}
+
+.boiler-fault-msg{
+	font-size: 25px;
+	text-align: center;
+	color: darken(red, 20%);
+	&.hidden{
+		display: none;
+	}
+}
+
+$boiler-buttons-font-size: 20px;
+
+.bolier-buttons-container{
+	padding: $boiler-buttons-font-size * 2 0;
+	width: 100%;
+	text-align: center;
+	position: relative;
+}
+
+.button-indicator{
+	display: inline-block;
+	vertical-align: middle;
+	width: 15px;
+	height: 15px;
+	border-radius: 7px;
+	/*border: 1px solid white;*/
+	/*box-shadow: inset 0px 2px 0px darken($theme-color, 10%);*/
+	
+	&.on{
+		background-color: green;
+		box-shadow: 0px 0px 3px 1px lighten(green, 20%);
+		background-image: -webkit-linear-gradient(top, #13fB04 0%, #58e343 50%, #ADED99 100%);
+	}
+	
+	&.off{
+		background-color: lighten(red, 10%);
+		box-shadow: 0px 0px 3px 1px lighten(red, 20%);
+		background-image: -webkit-linear-gradient(top, #fb1304 0%, #e35843 50%, #edad99 100%);
+	}
+}
+
+.btn-outline{
+	display: inline-block;
+	border: 8px solid lighten($theme-color, 35%);
+	border-radius: 5px;
+	background-color: lighten($theme-color, 35%);
+	margin: 0 5px;
+}
+
+.boiler-btn{
+	cursor: pointer;
+	background-color: lighten($theme-color, 10%);
+	padding: $boiler-buttons-font-size / 2;
+	position:relative;
+	font-size:24px;
+	text-decoration:none;
+	color: white;
+	border-width: 0px;
+	box-shadow: inset 0px 1px 0px lighten( $theme-color, 50% ), 0px 6px 0px darken($theme-color, 10%);
+	border-radius: 5px;
+	top: -6px;
+	
+	&:active{
+		top: 0px;
+		box-shadow: inset 0px 2px 0px darken($theme-color, 10%);
+	}
+	
+	&:disabled{
+		background-color: darken($theme-color, 10%);
+		color: #555;
+		cursor: default;
+		&:hover{
+			background-color: darken($theme-color, 10%);
+		}
+	}
+	
+	&:hover{
+		background: lighten( $theme-color, 20% );
+	}
+
+}
+
+.boiler-onOff-btn{
+	@extend .boiler-btn;
+	
+	&.on{
+		top: 0px;
+		border-color: $theme-color;
+		border-width: 0px;
+		box-shadow: inset 0px 2px 0px darken($theme-color, 10%);
+	}
+	
+}
+
+
+.boiler-btn-msg{
+	position: absolute;
+	width: 100%;
+	font-size: $boiler-buttons-font-size;
+	text-align: center;
+	bottom: $boiler-buttons-font-size / 2;
+}
+
+.boiler-select-container{
+	font-size: 20px;
+	padding: 5px;
+	margin: 10px 0px;
+	display: flex;
+	flex-direction: row;
+	position: relative;
+}
+
+.select-label{
+	align-self: center;
+}
+
+.boiler-select{
+	font-size: 20px;
+	flex-grow: 2;
+	cursor: pointer;
+	background-color: white;
+	margin: 0px 0px 0px 5px;
+	border-radius: 2px;	
+	border-width: 2px 2px 2px 2px;
+	border-radius: 2px 0px 0px 2px;
+	border-color: lighten($theme-color, 30%);
+
+	&:hover{
+		border-color: lighten($theme-color, 10%);
+		cursor: pointer;
+	}
+}
+
+.select-option{
+	
+	&:hover{
+		background-color: lighten($theme-color, 20%);
+		color: white;
+		cursor: pointer;
+	}
+}
+
+.boiler-select-btn{
+	position: relative;
+	//right: 2px;
+	font-size: 20px;
+	border-width: 2px 2px 2px 2px;
+	border-color: lighten($theme-color, 30%);
+	border-radius: 2px 2px 2px 0px;
+	background-color: white;
+	&:hover{
+		border-color: lighten($theme-color, 10%);
+		cursor: pointer;
+	}
+}
+
+.boiler-table-container{
+	margin: 10px 0 0 0;
+}
+
+$boiler-table-row-border: 3px solid $theme-color;
+
+$boiler-ascent-color: lighten( $theme-color, 65% );
+
+table{
+	border:$boiler-table-row-border;
+	border-collapse: collapse;
+	font-size: 20px;
+}
+
+ th, tr, td{
+	border: 1px solid $theme-color;
+}
+
+.boiler-table-row{
+	height: 2em;
+}
+
+.boiler-table{	
+	width: 100%;
+}
+
+.boiler-table-header{
+	font-size: 18px;
+	padding: 5px 0;
+	border-bottom: $boiler-table-row-border;
+	&:first-child{
+		border-right: $boiler-table-row-border;
+		/*background-color: $boiler-ascent-color;*/
+	}
+}
+
+.boiler-table-row-header{
+	background-color: $boiler-ascent-color;
+	border-bottom: $boiler-table-row-border;
+}
+
+.boiler-table-row-end{
+	border-bottom: $boiler-table-row-border;
+}
+
+.boiler-table-status{
+	text-align: center;
+	/*color: white;*/
+}
+
+.boiler-table-status-marker{
+	display: inline-block;
+	box-sizing: border-box;
+	height: 10px;
+	width: 10px;
+	border: 1px solid white;
+	border-radius: 5px;
+	&.pass{
+		background-color: green;
+	}
+	&.fail{
+		background-color: red;
+	}
+}
+
+.boiler-table-time{
+	/*padding: 0px 5px;*/
+	text-align: center;
+	border-left: $boiler-table-row-border;
+}
+
