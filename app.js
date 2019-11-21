@@ -35,7 +35,7 @@ const hbsHelpers = Object.assign(hbsDefaultHelpers);
 var mongoose = require('mongoose');
 
 //Set up default mongoose connection
-var mongoDB = 'mongodb://boiler_monitor:a11111@ds048537.mlab.com:48537/boiler-monitor'; //mlab database url
+var mongoDB = 'your mongoDB link here'; //mlab database url
 mongoose.connect(mongoDB);
 // Get Mongoose to use the global promise library
 mongoose.Promise = global.Promise;
